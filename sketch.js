@@ -8,14 +8,28 @@ function setup()
     noStroke();
     
     tamagotchi = {
-
+        points: [],
+        size: 200,
         setup: function(){
-            console.log("setup");
-
+            var incr = PI * 2/36 ;
+            for(var i = 0; i < 36; i++){
+                var v = createVector(0, 1);
+                var a = incr * i;
+                v.rotate(a);
+                this.points.push(v);
+            }
         },
         draw: function(){
-            console.log("draw");
-
+            fill(255);
+            beginShape();
+            for(var i = 0; i < this.points.length; i++){
+                var v = p5.Vector.mult(this.points[i], this.size);
+                vertex(
+                    v.x,
+                    v.y
+                )
+            }
+            endShape();
         }
     }
 
